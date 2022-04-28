@@ -136,3 +136,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')     #设置静�
 MEDIA_URL = '/img/'
 
 # APPEND_SLASH=False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/root/Catpus.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
