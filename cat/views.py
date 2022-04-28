@@ -85,7 +85,7 @@ def getcat(request):
     for i in res:
         i['catcolor']=CatColor.objects.get(id=i['catcolor']).colorname
         i['catlocation']=CatLocation.objects.get(id=i['catlocation']).locationname
-        i['catpic']='http://127.0.0.1:8080/img/'+i['catpic']
+        i['catpic']='https://catpus.top/img/'+i['catpic']
 
 
     # print(res)
@@ -100,7 +100,7 @@ def getonecat(request):
 
     res['catcolor'] = CatColor.objects.get(id=res['catcolor']).colorname
     res['catlocation'] = CatLocation.objects.get(id=res['catlocation']).locationname
-    res['catpic'] = 'http://127.0.0.1:8080/img/' + res['catpic']
+    res['catpic'] = 'https://catpus.top/img/' + res['catpic']
     print(res)
     return JsonResponse({'ret':0,'cat':res})
     # return JsonResponse({'ret': 0})
@@ -117,7 +117,7 @@ def getmylikecat(request):
     for i in cat_list:
         i['catcolor']=CatColor.objects.get(id=i['catcolor']).colorname
         i['catlocation']=CatLocation.objects.get(id=i['catlocation']).locationname
-        i['catpic']='http://127.0.0.1:8080/img/'+i['catpic']
+        i['catpic']='https://catpus.top/img/'+i['catpic']
 
     return JsonResponse({'ret': 0, 'cat_list': cat_list})
 

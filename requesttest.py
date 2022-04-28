@@ -17,10 +17,11 @@ import  requests,pprint
 #
 payload = {
     "action":"addcat",
+
+    
     "data":{
-        "CatName":"白猫",
-        "CatLocation":"打篮球",
-        "CatColor":"绿"
+        'explicit_inform_slots': {'Burning sensation behind the breastbone': True}, 
+        'implicit_inform_slots': {'Fever':False}
     }
 }
 response = requests.post('http://localhost:8080/test/',json=payload)
