@@ -30,7 +30,7 @@ def addcat(request):
     #     print(img.name)
     #     print(img.size)
     #     BASE_DIR = Path(__file__).resolve().parent.parent
-    #     fileroot = os.path.join(BASE_DIR, 'media/img/').replace('\\', '/')
+    #     fileroot = os.path.join(BASE_DIR, 'media/media/img/').replace('\\', '/')
     #     path=default_storage.save('img/'+img.name,ContentFile(img.read()))
     #     tmp_file = os.path.join(settings.MEDIA_ROOT, path)
     #     print(tmp_file)
@@ -85,7 +85,7 @@ def getcat(request):
     for i in res:
         i['catcolor']=CatColor.objects.get(id=i['catcolor']).colorname
         i['catlocation']=CatLocation.objects.get(id=i['catlocation']).locationname
-        i['catpic']='https://catpus.top/img/'+i['catpic']
+        i['catpic']='https://catpus.top/media/img/'+i['catpic']
 
 
     # print(res)
@@ -100,7 +100,7 @@ def getonecat(request):
 
     res['catcolor'] = CatColor.objects.get(id=res['catcolor']).colorname
     res['catlocation'] = CatLocation.objects.get(id=res['catlocation']).locationname
-    res['catpic'] = 'https://catpus.top/img/' + res['catpic']
+    res['catpic'] = 'https://catpus.top/media/img/' + res['catpic']
     print(res)
     return JsonResponse({'ret':0,'cat':res})
     # return JsonResponse({'ret': 0})
@@ -117,7 +117,7 @@ def getmylikecat(request):
     for i in cat_list:
         i['catcolor']=CatColor.objects.get(id=i['catcolor']).colorname
         i['catlocation']=CatLocation.objects.get(id=i['catlocation']).locationname
-        i['catpic']='https://catpus.top/img/'+i['catpic']
+        i['catpic']='https://catpus.top/media/img/'+i['catpic']
 
     return JsonResponse({'ret': 0, 'cat_list': cat_list})
 

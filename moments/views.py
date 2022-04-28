@@ -29,8 +29,8 @@ def getmoments(request):
     for i in res:
         i['cat'] = model_to_dict(Cat.objects.get(id=i['cat']))
         i['person'] = model_to_dict(User.objects.get(id=i['person']))
-        i['pic'] = 'https://catpus.top/img/' + i['pic']
-        i['cat']['catpic'] = 'https://catpus.top/img/' + i['cat']['catpic']
+        i['pic'] = 'https://catpus.top/media/img/' + i['pic']
+        i['cat']['catpic'] = 'https://catpus.top/media/img/' + i['cat']['catpic']
         i['cat']['catcolor']=CatColor.objects.get(id=i['cat']['catcolor']).colorname
         # i['cat'] = model_to_dict(i['cat'])
         # i['person'] = model_to_dict(i['person'])
