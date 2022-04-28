@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 from django.forms.models import model_to_dict
+
+from likes.views import likemoments
 from .models import Moments
+from likes.models import LikeMoments
 from cat.models import Cat,CatColor
 from user.models import User
 # Create your views here.
@@ -61,6 +64,9 @@ def delmoments(request):
     except BaseException:
         return JsonResponse({'ret': 1})
     else:
+        likemoments_list = LikeMoments.objects.filter(moments=moments)
+        for i in likemoments_list:
+            i.delete()
         moments.delete()
         return JsonResponse({'ret': 0})
 
