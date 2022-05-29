@@ -2,3 +2,4 @@
 venv/
 requesttest.py	
 testurl/
+__pycache__/

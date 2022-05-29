@@ -2,12 +2,11 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 from django.forms.models import model_to_dict
-
-from likes.views import likemoments
 from .models import Moments
 from likes.models import LikeMoments
 from cat.models import Cat,CatColor
 from user.models import User
+from utils.utils import *
 # Create your views here.
 
 def getmoments(request):
@@ -47,6 +46,8 @@ def addmoments(request):
     moments.person= User.objects.get(personid=data['personid'])
     moments.cat = Cat.objects.get(id=data['catid'])
     moments.content = data['content']
+    if not msg_sec_check(moments.content):
+        return JsonResponse({'ret':87014,'msg':'名称含有违规内容'})
     moments.pic = data['pic']
     moments.like = 0
     moments.save()

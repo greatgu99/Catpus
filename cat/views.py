@@ -1,10 +1,11 @@
+import imp
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
 import requests
-from Catpus import settings
+from django.conf import settings
 from .models import Cat,CatLocation,CatColor
 import os
 from pathlib import Path
@@ -14,12 +15,15 @@ from django.forms.models import model_to_dict
 from django.core import serializers
 from likes.models import LikeCat
 from user.models import User
-
+from utils.utils import *
 
 def addcat(request):
     data=request.params['data']
     cat=Cat()
     cat.catname = data['catname']
+    if not msg_sec_check(cat.catname):
+        return JsonResponse({'ret':87014,'msg':'名称含有违规内容'})
+
     cat.catpic = data['catpic']
     cat.catlike = 0
 
@@ -56,6 +60,11 @@ def addcat(request):
 def addpic(request):
     print("!!!!!!!!!!!!!!!!!!!")
     img = request.FILES.get('file')
+    
+    # 此处img_sec_check有待改进 包含更多返回值
+    if not img_sec_check(img):
+        return JsonResponse({'ret':87014,'msg':'图片含有违规内容'})
+
     if not img:
         return JsonResponse({'ret': 1, 'msg': '请上传图片'})
     else:

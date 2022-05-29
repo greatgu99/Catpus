@@ -17,17 +17,17 @@ from django.contrib import admin
 from django.urls import path,include
 
 from django.conf.urls.static import static
-from . import settings
+from django.conf import settings
 # from cat import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('test/', include('testurl.urls')),
+    path('api/testurls/', include('testurl.urls')),
     path('Catpus/user/',include('user.urls')),
     path('Catpus/cat/',include('cat.urls')),
     path('Catpus/likes/',include('likes.urls')),
     path('Catpus/moments/',include('moments.urls')),
-
+    path('Catpus/tweet/',include('tweet.urls')),
     # path('Catpus/addpic',views.addpic)
     # path('img/', include('showpic.urls')),
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT+'/img/')
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

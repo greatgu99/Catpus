@@ -4,7 +4,7 @@ from django.http import JsonResponse
 import json
 from django.http import HttpResponse
 import requests
-from Catpus import settings
+from django.conf import settings
 from .models import User
 
 def login(request):
