@@ -14,8 +14,8 @@ def gettweet(request):
         res.append(model_to_dict(i))
 
     for i in res:
-        # i['photo'] = 'https://catpus.top/media/tweet/' + i['photo']
-        i['photo'] = 'http://127.0.0.1:8080/media/tweet/' + i['photo']
+        i['photo'] = 'https://catpus.top/media/tweet/' + i['photo']
+        # i['photo'] = 'http://127.0.0.1:8080/media/tweet/' + i['photo']
 
     return JsonResponse({'ret': 0, 'tweet_list': res})
 

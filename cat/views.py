@@ -65,12 +65,17 @@ def addpic(request):
     if not img_sec_check(img):
         return JsonResponse({'ret':87014,'msg':'图片含有违规内容'})
 
+        
+    print(123123123)
     if not img:
         return JsonResponse({'ret': 1, 'msg': '请上传图片'})
     else:
+        print('--------')
         print(img.name)
         print(img.size)
+        print('--------')
         BASE_DIR = Path(__file__).resolve().parent.parent
+        img.seek(0)
         path=default_storage.save('img/'+img.name,ContentFile(img.read()))
         tmp_file = os.path.join(settings.MEDIA_ROOT, path)
         return JsonResponse({'ret':0,'tmp_file':img.name})
