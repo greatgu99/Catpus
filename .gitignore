@@ -3,3 +3,4 @@ venv/
 requesttest.py	
 testurl/
 __pycache__/
+db.sqlite3

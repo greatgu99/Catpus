@@ -94,7 +94,29 @@ def img_sec_check(img):
     if errcode == 87014:
         return False
 
+def get_openid(code):
+    params = {
+        'appid': 'wx6686a216a78b3702',
+        'secret': '6590de016b1a1b18a830edb5b6d57d45',
+        'js_code': code,
+        'grant_type': 'authorization_code'
+    }
+    host = 'api.weixin.qq.com'
+    path = '/sns/jscode2session'
+    path = '?'.join([path, urllib.parse.urlencode(params)])
+    method = 'GET'
+    res = send_request(host, path, method)
+    print(res)
+    if not res[0]:
+        return False
+    if res[1].get('errorcode') and res[1].get('errorcode') != 0:
+        return False
+    if res[1].get('openid'):
+        return res[1].get('openid')
+    return False
 
 if __name__ == '__main__':
-    msg_sec_check('xidada')
+    print(get_openid('073kMZZv3QH2QY2qNp1w3YcPIf2kMZZp'))
+    # msg_sec_check('xidada')
+
     # msgSecCheck('特3456书yuuo莞6543李zxcz蒜7782法fgnv级 完2347全dfji试3726测asad感3847知qwez到')

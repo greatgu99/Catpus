@@ -1,3 +1,4 @@
+import imp
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
@@ -6,6 +7,7 @@ from django.http import HttpResponse
 import requests
 from django.conf import settings
 from .models import User
+from utils.utils import *
 
 def login(request):
     print(request)
@@ -31,6 +33,11 @@ def login(request):
     user.save()
     return JsonResponse({'ret': 0})
 
+def getOpenid(request):
+    code = request.params['code']
+    print(code)
+    return JsonResponse({'ret':0,'openid':get_openid(code)})
+
 def dispatcher(request):
     if request.method == 'GET':
         request.params = request.GET
@@ -43,6 +50,8 @@ def dispatcher(request):
     action = request.params['action']
     if action == 'login':
         return login(request)
+    elif action == 'getOpenid':
+        return getOpenid(request)
     else:
         return JsonResponse({'ret': 1, 'msg': '不支持该类型http请求'})
 
