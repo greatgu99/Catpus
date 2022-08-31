@@ -79,7 +79,8 @@ def dispatcher(request):
     action = request.params['action']
 
     print((request.params))
-
+    if (not test_request(request)):
+        return JsonResponse({'ret': 1, 'msg': '数据不合格'})
 
     if action=='addmoments':
         return addmoments(request)

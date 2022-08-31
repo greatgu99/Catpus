@@ -48,6 +48,8 @@ def dispatcher(request):
 
 
     action = request.params['action']
+    if (not test_request(request)):
+        return JsonResponse({'ret': 1, 'msg': '数据不合格'})
     if action == 'login':
         return login(request)
     elif action == 'getOpenid':

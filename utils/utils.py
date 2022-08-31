@@ -4,6 +4,9 @@ import  requests
 import http.client
 import urllib
 import json
+import hmac
+import base64
+import hashlib
 
 def send_request(host, path, method, port=443, params={}):
     try:
@@ -114,6 +117,47 @@ def get_openid(code):
     if res[1].get('openid'):
         return res[1].get('openid')
     return False
+
+
+
+
+def test_request(request):
+    # if request.method == 'GET':
+    #     request.params = request.GET
+    # elif request.method in ['POST', 'PUT', 'DELETE']:
+    #     request.params = json.loads(request.body)
+    if 'data' in request.params:
+        
+        data=request.params['data']
+        print(data)
+        print(type(data))
+        if (isinstance(data, str)):
+            data = eval(data)
+        S=''
+        for i in data:
+            print(i)
+            if (i == 'hashCode'):
+                continue
+            S = S + i
+            S = S + str(data[i])
+        print(S)
+        SecretKey = 'rOWh1msXOsxLYu5xY0NtFVmcKVGntqLPTFNZ2gDy'
+        bytesToSign = S
+        bytesToSign = bytes(bytesToSign.encode('utf-8'))
+        SecretKey = bytes(SecretKey.encode('utf-8'))
+        dig = hmac.new(SecretKey, bytesToSign, digestmod=hashlib.sha256).digest()
+        sign = base64.b64encode(dig)
+        
+        # sign = sign[2:len(sign)-1]
+        sign = str(sign)
+        print(type(sign))
+        sign = sign[2:-1]
+        print(sign)
+        print(sign == data['hashCode'])
+        return (sign == data['hashCode'])
+        # return JsonResponse({'data':data,'method':request.method})
+    else:
+        return True
 
 if __name__ == '__main__':
     print(get_openid('073kMZZv3QH2QY2qNp1w3YcPIf2kMZZp'))

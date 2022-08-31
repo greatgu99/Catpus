@@ -5,7 +5,7 @@ from .models import LikeMoments, LikeCat
 from cat.models import Cat
 from moments.models import Moments
 from user.models import User
-
+from utils.utils import *
 
 # Create your views here.
 
@@ -137,6 +137,9 @@ def dispatcher(request):
         request.params = json.loads(request.body)
     action = request.params['action']
     print(action)
+    if (not test_request(request)):
+        return JsonResponse({'ret': 1, 'msg': '数据不合格'})
+
     if action == 'getlikecat':
         return getlikecat(request)
     elif action == 'getlikemoments':

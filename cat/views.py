@@ -146,7 +146,9 @@ def dispatcher(request):
     print("!!!!!!!!!!")
     print((request.params))
 
-
+    if (not test_request(request)):
+        return JsonResponse({'ret': 1, 'msg': '数据不合格'})
+    print('数据合格')
     if action=='addcat':
         return addcat(request)
     elif action=='getcat':

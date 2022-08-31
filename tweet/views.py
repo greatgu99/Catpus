@@ -4,6 +4,7 @@ from django.http import JsonResponse
 import json
 from django.forms.models import model_to_dict
 from .models import Tweet
+from utils.utils import *
 # Create your views here.
 
 def gettweet(request):
@@ -26,6 +27,8 @@ def dispatcher(request):
         request.params = json.loads(request.body)
     action = request.params['action']
 
+    if (not test_request(request)):
+        return JsonResponse({'ret': 1, 'msg': '数据不合格'})
     print((request.params))
 
     if action=='gettweet':
